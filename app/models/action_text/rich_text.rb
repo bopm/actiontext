@@ -14,7 +14,7 @@ class ActionText::RichText < ActiveRecord::Base
   has_many_attached :embeds
 
   before_save do
-    self.embeds = body.attachments.map(&:attachable) if body.present?
+    self.embeds = body.attachables.grep(ActiveStorage::Blob) if body.present?
   end
 
   def to_plain_text
