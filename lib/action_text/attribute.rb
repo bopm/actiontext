@@ -38,10 +38,6 @@ module ActionText
 
         scope :"with_rich_text_#{name}", -> { includes("rich_text_#{name}") }
         scope :"with_rich_text_#{name}_and_embeds", -> { includes("rich_text_#{name}": { embeds_attachments: :blob }) }
-
-        after_save do
-          public_send(name).save if public_send(name).changed?
-        end
       end
     end
   end
